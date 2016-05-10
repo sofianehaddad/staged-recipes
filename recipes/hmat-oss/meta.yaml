@@ -1,0 +1,41 @@
+{% set version = "1.1.2" %}
+
+package:
+  name: hmat-oss
+  version: {{ version }}
+
+source:
+  fn: {{ version }}.tar.gz
+  url: https://github.com/jeromerobert/hmat-oss/archive/{{ version }}.tar.gz
+  sha1: fe52fa22e413be862bec1b44a2b695a566525138
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - cmake
+#     - gcc  # [unix]
+    - openblas  # [not win]
+    #- lapack  # [not win]
+
+  run:
+    - openblas  # [not win]
+    #- lapack  # [not win]
+#     - libgcc  # [unix]
+
+test:
+  commands:
+    - test -f ${PREFIX}/include/hmat/hmat.h  # [unix]
+    - test -f ${PREFIX}/lib/libhmat-oss.so  # [linux]
+    - test -f ${PREFIX}/lib/libhmat-oss.dylib  # [osx]
+
+about:
+  home: https://github.com/jeromerobert/hmat-oss
+  license: GNU General Public License (GPL)
+  summary: A hierarchical matrix C/C++ library
+
+extra:
+  recipe-maintainers:
+    - jschueller
