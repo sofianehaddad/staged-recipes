@@ -1,5 +1,7 @@
 #!/bin/sh
 
+patch -p1 -i ${RECIPE_DIR}/7d14b6451d3f63a949fee9c09d349aec6edd193e.patch
+
 if test `uname` = "Darwin"
 then
   SO_EXT='.dylib'
