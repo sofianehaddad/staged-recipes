@@ -15,4 +15,10 @@ cp -r ./include/tbb ${PREFIX}/include
 
 # simple test instead of "make test" to avoid timeout
 c++ ${RECIPE_DIR}/tbb_example.c -I${PREFIX}/include -L${PREFIX}/lib -ltbb -o tbb_example
-DYLD_LIBRARY_PATH=${PREFIX}/lib ./tbb_example
+
+if test `uname` = "Darwin"
+then
+  install_name_tool -change @rpath/libtbb.dylib ${PREFIX}/lib/libtbb.dylib tbb_example
+fi
+
+./tbb_example
