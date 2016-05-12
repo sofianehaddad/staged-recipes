@@ -3,11 +3,19 @@
 # clang: error: invalid deployment target for -stdlib=libc++
 export MACOSX_DEPLOYMENT_TARGET=10.7
 
-make
+if test `uname` = "Darwin"
+then
+  SO_EXT='.dylib'
+else
+  SO_EXT='.so'
+fi
+
+make tbb_build_prefix=cmake_build cfg=release
 
 install -d ${PREFIX}/lib
 # filter libtbb.dylib ( or .so ), libtbbmalloc.dylib ( or .so )
-cp `find . -name "*lib*" | grep tbb | grep release` ${PREFIX}/lib
+#cp `find . -name "*lib*" | grep tbb | grep release` ${PREFIX}/lib
+cp build/cmake_build_release/*${SO_EXT}* ${PREFIX}/lib
 
 install -d ${PREFIX}/include
 # copy the include files
