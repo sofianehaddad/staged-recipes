@@ -16,7 +16,7 @@ cmake \
   -DCMAKE_EXE_LINKER_FLAGS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib" \
   -DPYTHON_EXECUTABLE="$PYTHON"                                \
   -DPYTHON_INCLUDE_PATH="$PREFIX/include/python${PY_VER}"      \
-  -DPYTHON_LIBRARY="$PREFIX/lib/libpython${PY_VER}.${SO_EXT}"  \
+  -DPYTHON_LIBRARY="$PREFIX/lib/libpython${PY_VER}${SO_EXT}"  \
   ..
 
 make install
